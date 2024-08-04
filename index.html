@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
+<body onload="onInit()">
     <header class="main-header full main-layout">
         <div class="main-header-inner flex space-between align-center">
             <div class="logo">Meme Generator</div>
@@ -34,14 +34,7 @@
                 <input type="text" class="search-bar" placeholder="Search memes...">
                 <div class="keyword-cloud" id="keyword-cloud">
                 </div>
-                <section class="gallery-section">
-                    <img src="./meme-imgs (square)/1.jpg" alt="" class="card-image">
-                    <img src="./meme-imgs (square)/2.jpg" alt="" class="card-image">
-                    <img src="./meme-imgs (square)/3.jpg" alt="" class="card-image">
-                    <img src="./meme-imgs (square)/4.jpg" alt="" class="card-image">
-                    <img src="./meme-imgs (square)/5.jpg" alt="" class="card-image">
-                    <img src="./meme-imgs (square)/6.jpg" alt="" class="card-image">
-
+                <section class="gallery-section" id="gallery-container">
                 </section>
                 <div class="upload-container">
                     <input type="file" id="file-upload">
@@ -50,14 +43,20 @@
                         Upload Image
                     </label>
                 </div>
-                <canvas id="meme-canvas" width="500" height="500"></canvas>
-            </div>
-        </section>
+                <section class="editor-section hidden">
+                    <div class="canvas-container">
+                        <canvas id="meme-canvas" width="500" height="500"></canvas>
+                        <input type="text" id="meme-text" placeholder="Enter meme text">
+                        <input type="color" id="text-color" value="#ff0000">
+                        <a id="download-link" download="meme.png">Download Meme</a>
+                    </div>
+                </section>
     </main>
 
     <script src="js/main.js"></script>
     <script src="js/memeController.js"></script>
-    <script src="js/memeService.js"></script>
+    <script src="js/services/memeService.js"></script>
+    <script src="js/galleryController.js"></script>
 </body>
 
 </html>

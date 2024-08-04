@@ -39,3 +39,15 @@ document.getElementById('language-select').addEventListener('change', function (
         document.body.dir = 'ltr'
     }
 })
+
+document.getElementById('meme-text').addEventListener('input', (ev) => {
+    setLineTxt(ev.target.value)
+    renderMeme()
+})
+
+function setLineTxt(text) {
+    gMeme.lines[0].txt = text
+}
+
+renderGallery()
+renderMeme()
