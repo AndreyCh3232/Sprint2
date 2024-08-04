@@ -1,0 +1,40 @@
+.main-header {
+    background-color: rgb(216, 86, 11);
+    height: 80px;
+    border-radius: 30px;
+    padding-top: 15px;
+    padding-left: 50px;
+
+}
+
+.main-header .nav-bar a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 50px;
+    width: 100px;
+}
+
+.main-header .nav-bar a:hover {
+    color: black;
+}
+
+.main-header .main-nav a.active {
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.main-header .logo {
+    color: black;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.language-selector {
+    margin-right: 20px;
+}

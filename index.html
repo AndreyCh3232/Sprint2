@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Meme Generator</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header class="main-header full main-layout">
+        <div class="main-header-inner flex space-between align-center">
+            <div class="logo">Meme Generator</div>
+            <nav class="main-nav">
+                <ul class="nav-bar flex clean-list">
+                    <li><a href="#" class="active">Gallery</a></li>
+                    <li><a href="#">Saved</a></li>
+                    <li><a href="#">Randomize</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <select id="language-select">
+                    <option value="en">English</option>
+                    <option value="he">עברית</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class=" flex main-content card-layout">
+        <section class="editor-section">
+            <div class="card">
+                <input type="text" class="search-bar" placeholder="Search memes...">
+                <div class="keyword-cloud" id="keyword-cloud">
+                </div>
+                <section class="gallery-section">
+                    <img src="./meme-imgs (square)/1.jpg" alt="" class="card-image">
+                    <img src="./meme-imgs (square)/2.jpg" alt="" class="card-image">
+                    <img src="./meme-imgs (square)/3.jpg" alt="" class="card-image">
+                    <img src="./meme-imgs (square)/4.jpg" alt="" class="card-image">
+                    <img src="./meme-imgs (square)/5.jpg" alt="" class="card-image">
+                    <img src="./meme-imgs (square)/6.jpg" alt="" class="card-image">
+
+                </section>
+                <div class="upload-container">
+                    <input type="file" id="file-upload">
+                    <label for="file-upload">
+                        <img src="upload_icon.png">
+                        Upload Image
+                    </label>
+                </div>
+                <canvas id="meme-canvas" width="500" height="500"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/memeController.js"></script>
+</body>
+
+</html>
