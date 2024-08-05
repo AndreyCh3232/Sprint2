@@ -28,14 +28,11 @@
         </div>
     </header>
 
-    <main class=" flex main-content card-layout">
-        <section class="editor-section">
+    <main class=" flex main-content card-layout" id="main-content">
+        <section class="editor-section" id="gallery-section">
             <div class="card">
                 <input type="text" class="search-bar" placeholder="Search memes...">
-                <div class="keyword-cloud" id="keyword-cloud">
-                </div>
-                <section class="gallery-section" id="gallery-container">
-                </section>
+                <div class="keyword-cloud" id="keyword-cloud"></div>
                 <div class="upload-container">
                     <input type="file" id="file-upload">
                     <label for="file-upload">
@@ -43,14 +40,29 @@
                         Upload Image
                     </label>
                 </div>
-                <section class="editor-section hidden">
-                    <div class="canvas-container">
-                        <canvas id="meme-canvas" width="500" height="500"></canvas>
-                        <input type="text" id="meme-text" placeholder="Enter meme text">
+                <section class="gallery-section" id="gallery-container"></section>
+            </div>
+        </section>
+    </main>
+
+
+    <main class="flex main-content card-layout hidden" id="canvas-content">
+        <section class="editor-section">
+            <div class="canvas-container">
+                <input type="text" id="meme-text" placeholder="Enter meme text...">
+                <canvas id="meme-canvas" width="500" height="500"></canvas>
+                <div class="btn-container">
+                    <button id="add-line">Add Line</button>
+                    <button id="switch-line">Switch Line</button>
+                    <a id="download-link" download="meme.png">Download Meme</a>
+                    <div class="font-container">
+                        <button id="increase-font">A +</button>
+                        <button id="decrease-font">A -</button>
                         <input type="color" id="text-color" value="#ff0000">
-                        <a id="download-link" download="meme.png">Download Meme</a>
                     </div>
-                </section>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="js/main.js"></script>

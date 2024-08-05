@@ -9,15 +9,41 @@ function renderMeme() {
 
     img.onload = function () {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-        ctx.font = '40px Arial'
-        ctx.fillStyle = gMeme.lines[0].color
-        ctx.textAlign = 'center'
-        ctx.fillText(gMeme.lines[0].txt, canvas.width / 2, 50)
-        updateDownloadLink(canvas);
+        gMeme.lines.forEach((line, idx) => {
+            ctx.font = `${line.size}px Arial`
+            ctx.fillStyle = line.color
+            ctx.textAlign = 'center'
+            ctx.fillText(line.txt, line.x, line.y)
+            if (idx === gMeme.selectedLineIdx) {
+                drawTextBox(ctx, line);
+            }
+        })
+        updateDownloadLink(canvas)
     }
+
+    document.getElementById('canvas-content').classList.remove('hidden')
+    document.getElementById('main-content').classList.add('hidden')
 }
 
 function updateDownloadLink(canvas) {
-    const downloadLink = document.getElementById('download-link');
-    downloadLink.href = canvas.toDataURL('image/png');
+    const downloadLink = document.getElementById('download-link')
+    downloadLink.href = canvas.toDataURL('image/png')
+}
+
+function drawTextBox(ctx, line) {
+    ctx.strokeStyle = 'black'
+    ctx.lineWidth = 2
+    const textMetrics = ctx.measureText(line.txt)
+    const textHeight = line.size
+    const padding = 5
+
+    line.width = textMetrics.width
+    line.height = textHeight + padding * 2
+
+    ctx.strokeRect(
+        line.x - textMetrics.width / 2 - padding,
+        line.y - textHeight,
+        textMetrics.width + padding * 2,
+        textHeight + padding * 2
+    )
 }

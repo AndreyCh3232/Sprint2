@@ -1,0 +1,74 @@
+.canvas-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    background-color: rgb(7, 71, 44);
+    border-radius: 20px;
+}
+
+.btn-container button,
+.btn-container a {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#download-link {
+    display: flex;
+    background-color: #6c757d;
+    color: black;
+    align-items: center;
+
+}
+
+#increase-font,
+#decrease-font {
+    background-color: #17a2b8;
+    color: black;
+}
+
+#add-line {
+    background-color: green;
+}
+
+#switch-line {
+    background-color: rgb(9, 88, 153);
+}
+
+.hidden {
+    display: none;
+}
+
+#text-color {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    border: 4px solid black;
+    cursor: pointer;
+}
+
+.font-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#meme-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}

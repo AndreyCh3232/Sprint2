@@ -1,0 +1,21 @@
+@media (max-width: 767px) {
+    .main-header .main-header-inner {
+        flex-direction: column;
+    }
+
+    .main-header .nav-bar {
+        justify-content: center;
+    }
+
+    .main-content {
+        padding: 5px;
+    }
+
+    .gallery-container img {
+        width: 100px;
+    }
+
+    .upload-container {
+        padding: 10px;
+    }
+}
