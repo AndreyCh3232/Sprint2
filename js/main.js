@@ -1,10 +1,38 @@
 'use strict'
 
+var lastClickedLink = null
+
 function onInit() {
     renderKeywords()
     renderGallery()
     setEventListeners()
+    enableDragAndDrop()
 }
+
+function handleClick(event) {
+    event.preventDefault()
+    if (lastClickedLink) {
+        lastClickedLink.style.backgroundColor = ''
+        lastClickedLink.style.color = 'white'
+    }
+    this.style.backgroundColor = 'white'
+    this.style.color = 'black'
+    this.style.borderRadius = '10px'
+    lastClickedLink = this
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var galleryLink = document.getElementById('gallery-link')
+    galleryLink.style.backgroundColor = 'white'
+    galleryLink.style.color = 'black'
+    galleryLink.style.borderRadius = '10px'
+    lastClickedLink = galleryLink
+
+    document.getElementById('gallery-link').addEventListener('click', handleClick)
+    document.getElementById('saved-link').addEventListener('click', handleClick)
+    document.getElementById('randomize-link').addEventListener('click', handleClick)
+
+})
 
 const keywords = {
     "Funny": 2,
@@ -28,11 +56,53 @@ function renderKeywords() {
         span.addEventListener("click", () => {
             keywords[keyword]++
             renderKeywords()
+            filterGallery(keyword)
         })
         keywordCloud.appendChild(span)
     }
 }
-// 
+
+function enableDragAndDrop() {
+    const canvas = document.getElementById('meme-canvas')
+    let isDragging = false
+    let startX, startY
+
+    canvas.addEventListener('mousedown', (ev) => {
+        const { offsetX, offsetY } = ev
+        const lineIdx = gMeme.lines.findIndex(line =>
+            offsetX >= line.x - line.width / 2 &&
+            offsetX <= line.x + line.width / 2 &&
+            offsetY >= line.y - line.height + line.size / 2 &&
+            offsetY <= line.y + line.size / 2
+        )
+        if (lineIdx !== -1) {
+            gMeme.selectedLineIdx = lineIdx
+            isDragging = true
+            startX = offsetX
+            startY = offsetY
+        }
+    })
+
+    canvas.addEventListener('mousemove', (ev) => {
+        if (isDragging) {
+            const { offsetX, offsetY } = ev
+            const dx = offsetX - startX
+            const dy = offsetY - startY
+            gMeme.lines[gMeme.selectedLineIdx].x += dx
+            gMeme.lines[gMeme.selectedLineIdx].y += dy
+            startX = offsetX
+            startY = offsetY
+            renderMeme()
+        }
+    })
+
+    canvas.addEventListener('mouseup', () => {
+        isDragging = false
+    })
+}
+
+document.addEventListener('DOMContentLoaded', enableDragAndDrop)
+
 function setEventListeners() {
     document.getElementById('language-select').addEventListener('change', function () {
         var selectedLanguage = this.value
@@ -53,11 +123,11 @@ function setEventListeners() {
         setColor(ev.target.value)
     })
     document.getElementById('increase-font').addEventListener('click', () => {
-        changeFontSize(2);
+        changeFontSize(2)
     })
 
     document.getElementById('decrease-font').addEventListener('click', () => {
-        changeFontSize(-2);
+        changeFontSize(-2)
     })
 
     document.getElementById('add-line').addEventListener('click', () => {
@@ -72,6 +142,61 @@ function setEventListeners() {
         const { offsetX, offsetY } = ev
         selectLine(offsetX, offsetY)
     })
+
+    document.getElementById('font-family').addEventListener('change', (ev) => {
+        setFontFamily(ev.target.value)
+    })
+    document.getElementById('align-left').addEventListener('click', () => {
+        setTextAlign('right')
+    })
+    document.getElementById('align-center').addEventListener('click', () => {
+        setTextAlign('center')
+    })
+    document.getElementById('align-right').addEventListener('click', () => {
+        setTextAlign('left')
+    })
+    document.getElementById('move-up').addEventListener('click', () => {
+        moveLine(-10)
+    })
+    document.getElementById('move-down').addEventListener('click', () => {
+        moveLine(10)
+    })
+    document.getElementById('delete-line').addEventListener('click', () => {
+        deleteLine()
+    })
+
+    document.getElementById('randomize-meme').addEventListener('click', () => {
+        generateRandomMeme()
+    })
+
+    document.getElementById('save-meme').addEventListener('click', () => {
+        saveMeme()
+    })
+
+    document.getElementById('saved-memes-nav').addEventListener('click', () => {
+        renderSavedMemes()
+    })
+
+    document.getElementById('filter-input').addEventListener('input', (ev) => {
+        filterGallery(ev.target.value)
+    })
+}
+
+function addSticker(sticker) {
+    gMeme.lines.push({
+        txt: sticker,
+        size: 30,
+        color: 'red',
+        x: 250,
+        y: gMeme.lines.length * 50 + 50,
+        width: 0,
+        height: 0,
+        font: 'Arial',
+        align: 'center',
+        isSticker: true
+    })
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+    renderMeme()
 }
 
 function addLine() {
@@ -82,7 +207,9 @@ function addLine() {
         x: 250,
         y: gMeme.lines.length * 50 + 50,
         width: 0,
-        height: 0
+        height: 0,
+        font: 'Arial',
+        align: 'center'
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
     document.getElementById('meme-text').value = gMeme.lines[gMeme.selectedLineIdx].txt
@@ -91,7 +218,10 @@ function addLine() {
 
 function switchLine() {
     gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
-    document.getElementById('meme-text').value = gMeme.lines[gMeme.selectedLineIdx].txt
+    const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
+    document.getElementById('meme-text').value = selectedLine.txt
+    document.getElementById('text-color').value = selectedLine.color
+    document.getElementById('font-family').value = selectedLine.font
     renderMeme()
 }
 
@@ -105,8 +235,68 @@ function selectLine(x, y) {
 
     if (selectedLine !== -1) {
         gMeme.selectedLineIdx = selectedLine
-        document.getElementById('meme-text').value = gMeme.lines[selectedLine].txt
-        document.getElementById('text-color').value = gMeme.lines[selectedLine].color
-        renderMeme();
+        const line = gMeme.lines[selectedLine]
+        document.getElementById('meme-text').value = line.txt
+        document.getElementById('text-color').value = line.color
+        document.getElementById('font-family').value = line.font
+        renderMeme()
     }
 }
+
+function setFontFamily(fontFamily) {
+    gMeme.lines[gMeme.selectedLineIdx].font = fontFamily
+    renderMeme()
+}
+function setTextAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].align = align
+    renderMeme()
+}
+
+function moveLine(delta) {
+    gMeme.lines[gMeme.selectedLineIdx].y += delta
+    renderMeme()
+}
+
+function deleteLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    gMeme.selectedLineIdx = Math.max(gMeme.selectedLineIdx - 1, 0)
+    renderMeme()
+}
+
+document.getElementById('share-facebook').addEventListener('click', () => {
+    const canvas = document.getElementById('meme-canvas')
+    const dataUrl = canvas.toDataURL('image/png')
+
+    const formData = new FormData()
+    formData.append('source', dataUrl)
+
+    fetch('https://graph.facebook.com/me/photos?access_token=YOUR_ACCESS_TOKEN', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.id) {
+                alert('Shared successfully!')
+            } else {
+                alert('Failed to share!')
+            }
+        })
+})
+
+document.getElementById('file-upload').addEventListener('change', (event) => {
+    const file = event.target.files[0]
+    if (!file) return;
+
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+        const img = new Image()
+        img.src = ev.target.result
+        img.onload = () => {
+            gMeme.selectedImgId = null
+            gMeme.imgSrc = img.src
+            renderMeme()
+        }
+    }
+    reader.readAsDataURL(file)
+})

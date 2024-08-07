@@ -14,9 +14,9 @@
             <div class="logo">Meme Generator</div>
             <nav class="main-nav">
                 <ul class="nav-bar flex clean-list">
-                    <li><a href="#" class="active">Gallery</a></li>
-                    <li><a href="#">Saved</a></li>
-                    <li><a href="#">Randomize</a></li>
+                    <li><a href="#" id="gallery-link">Gallery</a></li>
+                    <li><a href="#" id="saved-link">Saved</a></li>
+                    <li><a href="#" id="randomize-link">Randomize</a></li>
                 </ul>
             </nav>
             <div class="language-selector">
@@ -31,7 +31,17 @@
     <main class=" flex main-content card-layout" id="main-content">
         <section class="editor-section" id="gallery-section">
             <div class="card">
-                <input type="text" class="search-bar" placeholder="Search memes...">
+                <input type="text" class="search-bar" placeholder="Search memes..." list="keyword">
+                <datalist id="keyword">
+                    <option value="Funny">
+                    <option value="Sad">
+                    <option value="Happy">
+                    <option value="Crazy">
+                    <option value="lol">
+                    <option value="haha">
+                    <option value="Sarcastic">
+                    <option value="wow">
+                </datalist>
                 <div class="keyword-cloud" id="keyword-cloud"></div>
                 <div class="upload-container">
                     <input type="file" id="file-upload">
@@ -43,23 +53,92 @@
                 <section class="gallery-section" id="gallery-container"></section>
             </div>
         </section>
-    </main>
 
+        <section class="editor-section hidden" id="saved-memes-section">
+            <div class="card">
+                <h2>Saved Memes</h2>
+                <section class="saved-memes-gallery" id="saved-memes-gallery"></section>
+            </div>
+        </section>
+    </main>
 
     <main class="flex main-content card-layout hidden" id="canvas-content">
         <section class="editor-section">
             <div class="canvas-container">
                 <input type="text" id="meme-text" placeholder="Enter meme text...">
                 <canvas id="meme-canvas" width="500" height="500"></canvas>
-                <div class="btn-container">
-                    <button id="add-line">Add Line</button>
-                    <button id="switch-line">Switch Line</button>
-                    <a id="download-link" download="meme.png">Download Meme</a>
-                    <div class="font-container">
-                        <button id="increase-font">A +</button>
-                        <button id="decrease-font">A -</button>
-                        <input type="color" id="text-color" value="#ff0000">
-                    </div>
+            </div>
+        </section>
+    </main>
+
+    <main class=" flex main-container hidden" id="btn-content">
+        <div class="btn-container">
+            <button id="add-line">Add Line</button>
+            <button id="delete-line">Delete Line</button>
+            <button id="switch-line">Switch Line</button>
+            <a id="download-link" download="meme.png">Download Meme</a>
+            <button id="share-facebook">Share on Facebook</button>
+            <button id="save-meme">Save Meme</button>
+            <input type="file" id="file-upload" accept="image/*">
+        </div>
+        <div class="all-font-container">
+            <div class="font-container">
+                <button id="increase-font">A +</button>
+                <button id="decrease-font">A -</button>
+                <input type="color" id="text-color" value="#ff0000">
+
+                <select id="font-family">
+                    <option value="Arial">Arial</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Courier New">Courier New</option>
+                </select>
+
+                <div class="alignment-buttons">
+                    <button id="align-left">Left</button>
+                    <button id="align-center">Center</button>
+                    <button id="align-right">Right</button>
+                </div>
+
+                <div class="position-buttons">
+                    <button id="move-up">Up</button>
+                    <button id="move-down">Down</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="editor-section" id="sticker-section">
+            <div class="sticker">
+                <h3>Stickers</h3>
+                <div class="sticker-container">
+                    <span class="sticker" onclick="addSticker('😜')">😜</span>
+                    <span class="sticker" onclick="addSticker('😍')">😍</span>
+                    <span class="sticker" onclick="addSticker('😂')">😂</span>
+                    <span class="sticker" onclick="addSticker('😃')">😃</span>
+                    <span class="sticker" onclick="addSticker('🤣')">🤣</span>
+                    <span class="sticker" onclick="addSticker('😘')">😘</span>
+                    <span class="sticker" onclick="addSticker('🤩')">🤩</span>
+                    <span class="sticker" onclick="addSticker('😎')">😎</span>
+                    <span class="sticker" onclick="addSticker('😉')">😉</span>
+                    <span class="sticker" onclick="addSticker('💣')">💣</span>
+                    <span class="sticker" onclick="addSticker('🚀')">🚀</span>
+                    <span class="sticker" onclick="addSticker('💥')">💥</span>
+                    <span class="sticker" onclick="addSticker('👽')">👽</span>
+                    <span class="sticker" onclick="addSticker('💯')">💯</span>
+                    <span class="sticker" onclick="addSticker('👍')">👍</span>
+                    <span class="sticker" onclick="addSticker('🤪')">🤪</span>
+                    <span class="sticker" onclick="addSticker('👻')">👻</span>
+                    <span class="sticker" onclick="addSticker('😁')">😁</span>
+                    <span class="sticker" onclick="addSticker('🙃')">🙃</span>
+                    <span class="sticker" onclick="addSticker('😨')">😨</span>
+                    <span class="sticker" onclick="addSticker('🤖')">🤖</span>
+                    <span class="sticker" onclick="addSticker('❤️')">❤️</span>
+                    <span class="sticker" onclick="addSticker('🌸')">🌸</span>
+                    <span class="sticker" onclick="addSticker('💫')">💫</span>
+                    <span class="sticker" onclick="addSticker('🎈')">🎈</span>
+                    <span class="sticker" onclick="addSticker('🥳')">🥳</span>
+                    <span class="sticker" onclick="addSticker('👾')">👾</span>
+                    <span class="sticker" onclick="addSticker('👎')">👎</span>
                 </div>
             </div>
         </section>
@@ -69,6 +148,7 @@
     <script src="js/memeController.js"></script>
     <script src="js/services/memeService.js"></script>
     <script src="js/galleryController.js"></script>
+    <script src="js/services/storage.service.js"></script>
 </body>
 
 </html>

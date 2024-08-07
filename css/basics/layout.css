@@ -1,21 +1,34 @@
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .main-header .main-header-inner {
-        flex-direction: column;
-    }
-
-    .main-header .nav-bar {
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .main-content {
-        padding: 5px;
+        flex-direction: row;
     }
 
-    .gallery-container img {
-        width: 100px;
+    .canvas-container {
+        max-width: 600px;
     }
 
-    .upload-container {
-        padding: 10px;
+    #meme-canvas {
+        max-width: 100%;
+    }
+
+    #btn-content .btn-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #btn-content .btn-container button {
+        margin: 5px 0;
+        padding: 10px 20px;
+    }
+
+    .sticker-container {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
+

@@ -5,14 +5,14 @@ function renderMeme() {
     const ctx = canvas.getContext('2d')
     const img = new Image()
     const selectedImg = gImgs.find(img => img.id === gMeme.selectedImgId)
-    img.src = selectedImg ? selectedImg.url : 'meme-imgs (square)/1.jpg'
+    img.src = gMeme.imgSrc || (selectedImg ? selectedImg.url : 'meme-imgs (square)/1.jpg')
 
     img.onload = function () {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
         gMeme.lines.forEach((line, idx) => {
-            ctx.font = `${line.size}px Arial`
+            ctx.font = `${line.size}px ${line.font || 'Arial'}`
             ctx.fillStyle = line.color
-            ctx.textAlign = 'center'
+            ctx.textAlign = line.align || 'center'
             ctx.fillText(line.txt, line.x, line.y)
             if (idx === gMeme.selectedLineIdx) {
                 drawTextBox(ctx, line);
@@ -20,9 +20,11 @@ function renderMeme() {
         })
         updateDownloadLink(canvas)
     }
-
     document.getElementById('canvas-content').classList.remove('hidden')
     document.getElementById('main-content').classList.add('hidden')
+    document.getElementById('btn-content').classList.remove('hidden')
+    document.getElementById('main-container').classList.add('hidden')
+    
 }
 
 function updateDownloadLink(canvas) {
