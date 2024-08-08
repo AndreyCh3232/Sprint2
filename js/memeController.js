@@ -15,7 +15,7 @@ function renderMeme() {
             ctx.textAlign = line.align || 'center'
             ctx.fillText(line.txt, line.x, line.y)
             if (idx === gMeme.selectedLineIdx) {
-                drawTextBox(ctx, line);
+                drawTextBox(ctx, line)
             }
         })
         updateDownloadLink(canvas)
@@ -23,8 +23,6 @@ function renderMeme() {
     document.getElementById('canvas-content').classList.remove('hidden')
     document.getElementById('main-content').classList.add('hidden')
     document.getElementById('btn-content').classList.remove('hidden')
-    document.getElementById('main-container').classList.add('hidden')
-    
 }
 
 function updateDownloadLink(canvas) {

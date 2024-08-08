@@ -1,7 +1,7 @@
 'use strict'
 
 function renderGallery() {
-    const galleryContainer = document.getElementById('gallery-container');
+    const galleryContainer = document.getElementById('gallery-container')
     galleryContainer.innerHTML = gImgs.map(img =>
         `<img src="${img.url}" alt="Meme Image" onclick="onImgSelect(${img.id})">`
     ).join('')
@@ -18,7 +18,3 @@ function filterGallery(keyword) {
         `<img src="${img.url}" alt="Meme Image" onclick="onImgSelect(${img.id})">`
     ).join('')
 }
-
-document.getElementById('filter-input').addEventListener('input', (ev) => {
-    filterGallery(ev.target.value)
-})

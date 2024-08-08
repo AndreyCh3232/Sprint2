@@ -14,13 +14,13 @@
             <div class="logo">Meme Generator</div>
             <nav class="main-nav">
                 <ul class="nav-bar flex clean-list">
-                    <li><a href="#" id="gallery-link">Gallery</a></li>
-                    <li><a href="#" id="saved-link">Saved</a></li>
-                    <li><a href="#" id="randomize-link">Randomize</a></li>
+                    <li><a href="#" id="gallery-link" onclick="showGalleryAndInit()">Gallery</a></li>
+                    <li><a href="#" id="saved-link" onclick="showSaved()">Saved</a></li>
+                    <li><a href="#" id="randomize-link" onclick="randomizeMeme()">Randomize</a></li>
                 </ul>
             </nav>
             <div class="language-selector">
-                <select id="language-select">
+                <select id="language-select" onchange="changeLanguage()">
                     <option value="en">English</option>
                     <option value="he">עברית</option>
                 </select>
@@ -31,18 +31,23 @@
     <main class=" flex main-content card-layout" id="main-content">
         <section class="editor-section" id="gallery-section">
             <div class="card">
-                <input type="text" class="search-bar" placeholder="Search memes..." list="keyword">
-                <datalist id="keyword">
-                    <option value="Funny">
-                    <option value="Sad">
-                    <option value="Happy">
-                    <option value="Crazy">
-                    <option value="lol">
-                    <option value="haha">
-                    <option value="Sarcastic">
-                    <option value="wow">
-                </datalist>
-                <div class="keyword-cloud" id="keyword-cloud"></div>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <input type="text" class="search-bar" placeholder="Search memes..." list="keyword"
+                            id="search-bar">
+                        <datalist id="keyword">
+                            <option value="Angry">
+                            <option value="Sleep">
+                            <option value="Happy">
+                            <option value="Love">
+                            <option value="lol">
+                            <option value="haha">
+                            <option value="Sarcastic">
+                            <option value="Wow">
+                        </datalist>
+                    </div>
+                    <div class=" grid-item keyword-cloud" id="keyword-cloud"></div>
+                </div>
                 <div class="upload-container">
                     <input type="file" id="file-upload">
                     <label for="file-upload">
@@ -139,6 +144,10 @@
                     <span class="sticker" onclick="addSticker('🥳')">🥳</span>
                     <span class="sticker" onclick="addSticker('👾')">👾</span>
                     <span class="sticker" onclick="addSticker('👎')">👎</span>
+                    <span class="sticker" onclick="addSticker('🫢')">🫢</span>
+                    <span class="sticker" onclick="addSticker('🤯')">🤯</span>
+                    <span class="sticker" onclick="addSticker('💟')">💟</span>
+                    <span class="sticker" onclick="addSticker('💤')">💤</span>
                 </div>
             </div>
         </section>
@@ -149,6 +158,7 @@
     <script src="js/services/memeService.js"></script>
     <script src="js/galleryController.js"></script>
     <script src="js/services/storage.service.js"></script>
+    <script src="js/services/utils.service.js"></script>
 </body>
 
 </html>

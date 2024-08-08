@@ -8,19 +8,35 @@
 }
 
 .card {
+    display: flex;
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
     background-color: rgb(0, 23, 43);
-    
+    flex-direction: column;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-bar {
-    padding: 10px;
+    width: 100%;
+    padding: 0.5rem;
     border-radius: 30px;
     border: 1px solid #ccc;
     font-size: 25px;
-    width: 100%;
     box-sizing: border-box;
 }
 
@@ -63,14 +79,13 @@
 .keyword-cloud {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     background-color: gray;
     border-radius: 30px;
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    margin: 20px 0px;
+    gap: 0.5rem;
+    padding: 0.5rem;
 }
 
 .keyword-cloud .keyword {
@@ -97,4 +112,43 @@
 #gallery-container img:hover {
     transform: scale(1.05);
     transition: transform 0.2s;
+}
+
+.saved-memes-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.saved-meme {
+    position: relative;
+}
+
+.saved-meme img {
+    max-width: 50vh;
+    border-radius: 10px;
+}
+
+.saved-meme button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#saved-memes-section h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    color: black;
+    background-color: #353434;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }

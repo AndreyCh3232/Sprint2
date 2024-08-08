@@ -3,10 +3,40 @@
 var lastClickedLink = null
 
 function onInit() {
+    document.getElementById('search-bar').addEventListener('input', searchMemes)
     renderKeywords()
     renderGallery()
     setEventListeners()
     enableDragAndDrop()
+    renderGallery(gImgs)
+}
+
+function searchMemes() {
+    const searchTerm = document.getElementById('search-bar').value.toLowerCase()
+    const filteredImgs = gImgs.filter(img => img.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm)))
+    renderGallery(filteredImgs)
+}
+
+function showGalleryAndInit() {
+    showGallery()
+    renderGallery()
+}
+
+function showGallery() {
+    document.getElementById('main-content').classList.remove('hidden')
+    document.getElementById('gallery-section').classList.remove('hidden')
+    document.getElementById('saved-memes-section').classList.add('hidden')
+    document.getElementById('canvas-content').classList.add('hidden')
+    document.getElementById('btn-content').classList.add('hidden')
+    renderGallery(gImgs)
+}
+
+function showSaved() {
+    document.getElementById('main-content').classList.remove('hidden')
+    document.getElementById('saved-memes-section').classList.remove('hidden')
+    document.getElementById('gallery-section').classList.add('hidden')
+    document.getElementById('canvas-content').classList.add('hidden')
+    document.getElementById('btn-content').classList.add('hidden')
 }
 
 function handleClick(event) {
@@ -28,21 +58,28 @@ document.addEventListener('DOMContentLoaded', function () {
     galleryLink.style.borderRadius = '10px'
     lastClickedLink = galleryLink
 
-    document.getElementById('gallery-link').addEventListener('click', handleClick)
-    document.getElementById('saved-link').addEventListener('click', handleClick)
-    document.getElementById('randomize-link').addEventListener('click', handleClick)
+    document.getElementById('gallery-link').addEventListener('click', function (event) {
+        handleClick.call(this, event)
+        showGalleryAndInit()
+    })
 
+    document.getElementById('saved-link').addEventListener('click', function (event) {
+        handleClick.call(this, event)
+        showSaved()
+    })
+
+    document.getElementById('randomize-link').addEventListener('click', handleClick)
 })
 
 const keywords = {
-    "Funny": 2,
-    "Sad": 3,
+    "Angry": 2,
+    "Sleep": 3,
     "Happy": 4,
-    "Crazy": 2,
+    "Love": 2,
     "lol": 3,
     "haha": 4,
     "Sarcastic": 2,
-    "wow": 3
+    "Wow": 3
 }
 
 function renderKeywords() {
@@ -64,8 +101,8 @@ function renderKeywords() {
 
 function enableDragAndDrop() {
     const canvas = document.getElementById('meme-canvas')
-    let isDragging = false
-    let startX, startY
+    var isDragging = false
+    var startX, startY
 
     canvas.addEventListener('mousedown', (ev) => {
         const { offsetX, offsetY } = ev
@@ -165,7 +202,7 @@ function setEventListeners() {
         deleteLine()
     })
 
-    document.getElementById('randomize-meme').addEventListener('click', () => {
+    document.getElementById('randomize-link').addEventListener('click', () => {
         generateRandomMeme()
     })
 
@@ -173,11 +210,11 @@ function setEventListeners() {
         saveMeme()
     })
 
-    document.getElementById('saved-memes-nav').addEventListener('click', () => {
+    document.getElementById('saved-link').addEventListener('click', () => {
         renderSavedMemes()
     })
 
-    document.getElementById('filter-input').addEventListener('input', (ev) => {
+    document.getElementById('search-bar').addEventListener('input', (ev) => {
         filterGallery(ev.target.value)
     })
 }
@@ -286,7 +323,7 @@ document.getElementById('share-facebook').addEventListener('click', () => {
 
 document.getElementById('file-upload').addEventListener('change', (event) => {
     const file = event.target.files[0]
-    if (!file) return;
+    if (!file) return
 
     const reader = new FileReader()
     reader.onload = (ev) => {
@@ -300,3 +337,17 @@ document.getElementById('file-upload').addEventListener('change', (event) => {
     }
     reader.readAsDataURL(file)
 })
+
+function changeLanguage() {
+    const language = document.getElementById('language-select').value
+    if (language === 'he') {
+        document.getElementById('gallery-link').textContent = 'גלריה'
+        document.getElementById('saved-link').textContent = 'שמורים'
+        document.getElementById('randomize-link').textContent = 'אקראי'
+    } else {
+        document.getElementById('gallery-link').textContent = 'Gallery'
+        document.getElementById('saved-link').textContent = 'Saved'
+        document.getElementById('randomize-link').textContent = 'Randomize'
+    }
+}
+

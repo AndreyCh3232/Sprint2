@@ -30,7 +30,6 @@
     font-family: Arial, Helvetica, sans-serif;
     height: 50px;
     width: 100px;
-    transition: color 0.3s;
 }
 
 .language-selector select {
