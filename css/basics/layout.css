@@ -1,41 +1,8 @@
-/* @media (max-width: 768px) {
-    .main-header .main-header-inner {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .main-content {
-        flex-direction: row;
-    }
-
-    .canvas-container {
-        max-width: 600px;
-    }
-
-    #meme-canvas {
-        max-width: 100%;
-    }
-
-    #btn-content .btn-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #btn-content .btn-container button {
-        margin: 5px 0;
-        padding: 10px 20px;
-    }
-
-    .sticker-container {
-        grid-template-columns: repeat(4, 1fr);
-    }
-} */
-
 @media (max-width: 768px) {
     .main-header {
         padding: 10px;
         flex-direction: column;
+        align-items: center;
     }
 
     .main-header .logo {
@@ -50,14 +17,19 @@
 
     .main-header .nav-bar a {
         width: 100%;
+        text-align: center;
+        padding: 10px 0;
     }
 
     .main-content {
         padding: 10px;
+        gap: 10px;
     }
 
     .card {
         padding: 10px;
+        margin: 10px 0;
+        align-items: center;
     }
 
     .grid-container {
@@ -65,37 +37,137 @@
     }
 
     .upload-container {
-        width: 90%;
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+        width: 100%;
+        max-width: 300px;
         padding: 20px;
-        margin: 10px auto;
+    }
+
+    .upload-container img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .upload-container label {
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .search-bar {
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
     }
 
     .keyword-cloud {
         flex-direction: column;
+        gap: 5px;
+    }
+
+    #saved-memes-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        width: 100%;
+    }
+
+    #saved-memes-section .card {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        padding: 20px;
+        margin: auto;
     }
 
     .saved-memes-gallery {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
+        gap: 10px;
     }
 
     .btn-container {
         grid-template-columns: 1fr;
         gap: 10px;
+        padding: 10px;
     }
 
     #download-link {
         flex-direction: column;
         padding: 10px;
+        text-align: center;
+        justify-content: center
     }
 
     .font-container {
         gap: 5px;
+        margin: 5px 0;
     }
 
     .sticker-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 5px;
+    }
+
+    .canvas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #meme-canvas {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+    }
+
+    #meme-text {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 10px;
+    }
+
+    #gallery-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .alignment-buttons,
+    .position-buttons {
+        flex-direction: column;
+    }
+
+    #font-family {
+        margin-bottom: 5px;
+    }
+
+    .sticker {
+        font-size: 20px;
+    }
+
+    .main-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, auto);
+        gap: 10px;
+        padding: 10px;
     }
 }
