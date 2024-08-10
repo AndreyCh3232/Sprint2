@@ -71,15 +71,6 @@
         gap: 5px;
     }
 
-    #saved-memes-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        width: 100%;
-    }
-
     #saved-memes-section .card {
         width: 100%;
         max-width: 500px;
@@ -94,6 +85,19 @@
         align-items: center;
         width: 100%;
         gap: 10px;
+    }
+
+    .saved-meme {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .saved-meme img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
     }
 
     .btn-container {
