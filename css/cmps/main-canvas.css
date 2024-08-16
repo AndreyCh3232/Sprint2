@@ -31,7 +31,6 @@
     background-color: #6c757d;
     color: black;
     align-items: center;
-
 }
 
 #increase-font,
@@ -155,6 +154,7 @@
 
 #delete-line {
     color: black;
+    margin: 10px 10px;
 }
 
 #download-link {

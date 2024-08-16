@@ -103,6 +103,7 @@ function enableDragAndDrop() {
     const canvas = document.getElementById('meme-canvas')
     var isDragging = false
     var startX, startY
+    var offsetXFromLine, offsetYFromLine
 
     canvas.addEventListener('mousedown', (ev) => {
         const { offsetX, offsetY } = ev
@@ -115,6 +116,8 @@ function enableDragAndDrop() {
         if (lineIdx !== -1) {
             gMeme.selectedLineIdx = lineIdx
             isDragging = true
+            offsetXFromLine = offsetX - gMeme.lines[lineIdx].x
+            offsetYFromLine = offsetY - gMeme.lines[lineIdx].y
             startX = offsetX
             startY = offsetY
         }
@@ -123,10 +126,8 @@ function enableDragAndDrop() {
     canvas.addEventListener('mousemove', (ev) => {
         if (isDragging) {
             const { offsetX, offsetY } = ev
-            const dx = offsetX - startX
-            const dy = offsetY - startY
-            gMeme.lines[gMeme.selectedLineIdx].x += dx
-            gMeme.lines[gMeme.selectedLineIdx].y += dy
+            gMeme.lines[gMeme.selectedLineIdx].x = offsetX - offsetXFromLine
+            gMeme.lines[gMeme.selectedLineIdx].y = offsetY - offsetYFromLine
             startX = offsetX
             startY = offsetY
             renderMeme()
@@ -184,13 +185,13 @@ function setEventListeners() {
         setFontFamily(ev.target.value)
     })
     document.getElementById('align-left').addEventListener('click', () => {
-        setTextAlign('right')
+        setTextAlign(-10)
     })
     document.getElementById('align-center').addEventListener('click', () => {
-        setTextAlign('center')
+        setTextAlignCenter()
     })
     document.getElementById('align-right').addEventListener('click', () => {
-        setTextAlign('left')
+        setTextAlign(10)
     })
     document.getElementById('move-up').addEventListener('click', () => {
         moveLine(-10)
@@ -284,8 +285,18 @@ function setFontFamily(fontFamily) {
     gMeme.lines[gMeme.selectedLineIdx].font = fontFamily
     renderMeme()
 }
+
+function setTextAlignCenter() {
+    const canvasWidth = 720
+    const textWidth = gMeme.lines[gMeme.selectedLineIdx].width
+
+    gMeme.lines[gMeme.selectedLineIdx].x = (canvasWidth / 2) - (textWidth / 2)
+    gMeme.lines[gMeme.selectedLineIdx].y = (canvasWidth / 2) - (textWidth / 2)
+    renderMeme()
+}
+
 function setTextAlign(align) {
-    gMeme.lines[gMeme.selectedLineIdx].align = align
+    gMeme.lines[gMeme.selectedLineIdx].x += align
     renderMeme()
 }
 

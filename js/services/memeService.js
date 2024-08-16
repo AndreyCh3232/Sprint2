@@ -92,7 +92,7 @@ function saveMeme() {
     memes.push({
         ...gMeme,
         imgUrl: imgUrl
-    });
+    })
     memeService.saveMemes(memes)
     alert('Meme saved!')
 }
@@ -123,5 +123,6 @@ function deleteSavedMeme(index) {
     const memes = memeService.getMemes()
     memes.splice(index, 1)
     memeService.saveMemes(memes)
+    alert('Meme deleted!')
     renderSavedMemes()
 }
