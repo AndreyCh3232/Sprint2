@@ -43,7 +43,8 @@
         text-align: center;
         margin: auto;
         width: 100%;
-        max-width: 300px;
+        max-width: 32vh;
+        max-height: 35vh;
         padding: 20px;
     }
 

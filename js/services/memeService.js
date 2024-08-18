@@ -26,7 +26,7 @@ var gMeme = {
             font: 'Arial',
             align: 'center',
             width: 0,
-            height: 0
+            height: 0,
         }
     ]
 }
