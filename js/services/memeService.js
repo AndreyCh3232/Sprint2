@@ -126,3 +126,24 @@ function deleteSavedMeme(index) {
     alert('Meme deleted!')
     renderSavedMemes()
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const prevButton = document.querySelector('.prev')
+    const nextButton = document.querySelector('.next')
+    const stickerContainer = document.querySelector('.sticker-container')
+    const scrollAmount = 100
+
+    prevButton.addEventListener('click', function () {
+        stickerContainer.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        })
+    })
+
+    nextButton.addEventListener('click', function () {
+        stickerContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        })
+    })
+})

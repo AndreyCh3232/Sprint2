@@ -43,7 +43,7 @@
         text-align: center;
         margin: auto;
         width: 100%;
-        max-width: 33vh;
+        max-width: 35vh;
         max-height: 35vh;
         padding: 20px;
     }
@@ -101,9 +101,35 @@
     }
 
     .btn-container {
+        display: grid;
         grid-template-columns: 1fr;
         gap: 10px;
         padding: 10px;
+        justify-content: center;
+        justify-items: center;
+        width: 100%;
+        max-width: 326px;
+    }
+
+    .all-font-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+        justify-content: center;
+        justify-items: center;
+        width: 100%;
+    }
+
+    .editor-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+        justify-content: center;
+        justify-items: center;
+        width: 100%;
+        max-width: 326px;
     }
 
     #download-link {
@@ -113,15 +139,6 @@
         justify-content: center
     }
 
-    .font-container {
-        gap: 5px;
-        margin: 5px 0;
-    }
-
-    .sticker-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 5px;
-    }
 
     .canvas-container {
         display: flex;
@@ -163,15 +180,15 @@
         margin-bottom: 5px;
     }
 
-    .sticker {
-        font-size: 20px;
-    }
-
     .main-container {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(3, auto);
-        gap: 10px;
-        padding: 10px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        margin: auto;
     }
 }
